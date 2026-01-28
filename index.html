@@ -79,6 +79,55 @@
 </head>
 
 <body>
+    <div class="poetry-container">
+        <p id="line">"I want to be improbable beautiful and afraid of nothing, / as though I had wings."</p>
+        <h3 id="author">— <span class="author-name">Mary Oliver,</span> <span class="title">Starlings in Winter</span></h3>
+        <button id="next-line">New Inspiration</button>
+        <button id="save-btn">Save to Favorites</button>
+    </div>
 
+    <div id="favorites-section">
+        <h4>Collected Lines</h4>
+        <ul id="fav-list"></ul>
+    </div>
+
+    <script>
+        // Array of poetry lines to choose from
+        const poetryLines = [
+            { line: "What will you do, / when it is your turn in the field with the god?", title: "The Wild Iris", author: "Louise Glück" },
+            { line: "She learned her hands in a fairy-tale, / And her mouth on a valentine.", title: "Witch-Wife", author: "Edna St. Vincent Millay" },
+            { line: "But the night was dark / and love was a burning fence / about my house.", title: "Gemini", author: "Audre Lorde" },
+            { line: "You do not have to be good. / You do not have to walk on your knees / for a hundred miles through the desert repenting.", title: "Wild Geese", author: "Mary Oliver" },
+            { line: "I should have loved a thunderbird instead; / At least when spring comes they roar back again.", title: "Mad Girl's Love Song", author: "Sylvia Plath" },
+            { line: "Perhaps the world will end at the kitchen table, while we are laughing and / crying, eating of the last sweet bite.", title: "Perhaps the World Ends Here", author: "Joy Harjo" },
+            { line: "When joy comes, will I be ready, I wonder.", title: "Spring", author: "Maya C. Popa" },
+            { line: "A replica of earth / except there was love here. / Doesn't everyone want love?", title: "A Myth of Devotion", author: "Louise Glück" }
+        ];
+
+        // Get references to HTML elements
+        const lineElement = document.getElementById('line');
+        const authorElement = document.getElementById('author');
+        const nextButton = document.getElementById('next-line');
+        const saveButton = document.getElementById('save-btn');
+        const favoritesList = document.getElementById('fav-list');
+
+        // Keep track of what's currently displayed
+        let currentLine = { line: "I want to be improbable beautiful and afraid of nothing, / as though I had wings.", title: "Starlings in Winter", author: "Mary Oliver" };
+
+        // When "New Inspiration" is clicked, show a random line
+        nextButton.onclick = function () {
+            const randomIndex = Math.floor(Math.random() * poetryLines.length);
+            currentLine = poetryLines[randomIndex];
+            lineElement.innerText = `"${currentLine.line}"`;
+            authorElement.innerHTML = `— <span class="author-name">${currentLine.author},</span> <span class="title">${currentLine.title}</span>`;
+        };
+        
+        // When "Save to Favorites" is clicked, add current line to the list
+        saveButton.onclick = function() {
+            const listItem = document.createElement('li');
+            listItem.innerText = `${currentLine.line} — ${currentLine.author}, ${currentLine.title}`;
+            favoritesList.appendChild(listItem);
+        };
+    </script>
 </body>
 </html>
